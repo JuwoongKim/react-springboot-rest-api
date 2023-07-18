@@ -3,11 +3,13 @@ package com.juwoong.reactspringbootrestapi.content.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+
 import com.juwoong.reactspringbootrestapi.content.model.Content;
 import com.juwoong.reactspringbootrestapi.content.model.constants.ContentType;
 
@@ -41,6 +43,16 @@ public class JdbcContentRepository implements ContentRepository {
         RowMapper<Content> contentRowMapper = contentRowMapper();
 
         return jdbcTemplate.query("SELECT * FROM CONTENT", contentRowMapper);
+    }
+
+    @Override
+    public Content findById(UUID contentId) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("contentId", contentId.toString());
+
+        RowMapper<Content> contentRowMapper = contentRowMapper();
+
+        return jdbcTemplate.queryForObject("SELECT * FROM CONTENT WHERE CONTENT_ID = :contentId", parameterSource,
+            contentRowMapper);
     }
 
     private RowMapper<Content> contentRowMapper() {

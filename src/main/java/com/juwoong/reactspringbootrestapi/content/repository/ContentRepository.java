@@ -1,6 +1,7 @@
 package com.juwoong.reactspringbootrestapi.content.repository;
 
 import java.util.List;
+import java.util.UUID;
 import org.springframework.stereotype.Repository;
 import com.juwoong.reactspringbootrestapi.content.model.Content;
 
@@ -10,5 +11,7 @@ public interface ContentRepository {
     public Content save(Content content);
 
     public List<Content> findAll();
+
+    public Content findById(UUID contentId);
 
 }

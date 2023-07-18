@@ -1,8 +1,10 @@
 package com.juwoong.reactspringbootrestapi.content.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+
 import com.juwoong.reactspringbootrestapi.content.controller.request.ContentRequest;
 import com.juwoong.reactspringbootrestapi.content.model.Content;
 import com.juwoong.reactspringbootrestapi.content.repository.ContentRepository;
@@ -29,6 +31,12 @@ public class ContentService {
             .stream()
             .map(v -> toDTO(v))
             .toList();
+    }
+
+    public ContentDto findById(UUID contentId) {
+        Content content = contentRepository.findById(contentId);
+
+        return toDTO(content);
     }
 
     private ContentDto toDTO(Content content) {
