@@ -55,6 +55,19 @@ public class JdbcContentRepository implements ContentRepository {
             contentRowMapper);
     }
 
+    @Override
+    public void deleteAll() {
+        SqlParameterSource parameterSource = new MapSqlParameterSource();
+        jdbcTemplate.update("DELETE FROM CONTENT", parameterSource);
+    }
+
+    @Override
+    public void deleteById(UUID contentId) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("contentId", contentId.toString());
+
+        jdbcTemplate.update("DELETE FROM CONTENT WHERE CONTENT_ID = :contentId", parameterSource);
+    }
+
     private RowMapper<Content> contentRowMapper() {
         return (rs, rowNum) -> {
             UUID contentId = UUID.fromString(rs.getString("content_id"));

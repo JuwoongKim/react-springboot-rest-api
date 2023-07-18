@@ -39,6 +39,14 @@ public class ContentService {
         return toDTO(content);
     }
 
+    public void deleteAll() {
+        contentRepository.deleteAll();
+    }
+
+    public void deleteById(UUID contentId) {
+        contentRepository.deleteById(contentId);
+    }
+
     private ContentDto toDTO(Content content) {
         return new ContentDto(content.getContentId(), content.getTitle(), content.getText(), content.getContentType(),
             content.getPrice(), content.getCreatedAt()
