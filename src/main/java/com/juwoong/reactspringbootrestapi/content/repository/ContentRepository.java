@@ -20,4 +20,6 @@ public interface ContentRepository {
 
     public void deleteById(UUID contentId);
 
+    public Content update(Content content);
+
 }

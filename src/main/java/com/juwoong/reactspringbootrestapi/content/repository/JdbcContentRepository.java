@@ -32,7 +32,7 @@ public class JdbcContentRepository implements ContentRepository {
             .addValue("price", content.getPrice())
             .addValue("createdAt", content.getCreatedAt().toString());
 
-        jdbcTemplate.update("INSERT INTO CONTENT VALUES (:contentId, :title, :text,:contentType,:price,:createdAt )",
+        jdbcTemplate.update("INSERT INTO CONTENT VALUES (:contentId, :title, :text, :contentType, :price, :createdAt )",
             parameterSource);
 
         return content;
@@ -66,6 +66,22 @@ public class JdbcContentRepository implements ContentRepository {
         SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("contentId", contentId.toString());
 
         jdbcTemplate.update("DELETE FROM CONTENT WHERE CONTENT_ID = :contentId", parameterSource);
+    }
+
+    @Override
+    public Content update(Content content) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource()
+            .addValue("contentId", content.getContentId().toString())
+            .addValue("title", content.getTitle())
+            .addValue("text", content.getText())
+            .addValue("contentType", content.getContentType().toString())
+            .addValue("price", content.getPrice());
+
+        jdbcTemplate.update(
+            "UPDATE CONTENT SET TITLE = :title, TEXT = :text, CONTENT_TYPE = :contentType, PRICE = :price WHERE CONTENT_ID = :contentId",
+            parameterSource);
+
+        return findById(content.getContentId());
     }
 
     private RowMapper<Content> contentRowMapper() {

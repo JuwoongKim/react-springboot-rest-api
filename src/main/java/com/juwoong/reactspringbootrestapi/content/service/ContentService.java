@@ -47,6 +47,13 @@ public class ContentService {
         contentRepository.deleteById(contentId);
     }
 
+    public ContentDto update(ContentRequest.Update request) {
+        Content content = new Content(request.getContentId(), request.getTitle(), request.getText(), request.getContentType(),
+            request.getPrice());
+
+        return toDTO(contentRepository.update(content));
+    }
+
     private ContentDto toDTO(Content content) {
         return new ContentDto(content.getContentId(), content.getTitle(), content.getText(), content.getContentType(),
             content.getPrice(), content.getCreatedAt()

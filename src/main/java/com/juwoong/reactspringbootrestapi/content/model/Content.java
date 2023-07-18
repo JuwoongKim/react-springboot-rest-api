@@ -26,5 +26,13 @@ public class Content {
         this.createdAt = LocalDateTime.now();
     }
 
+    public Content(UUID contentId, String title, String text, ContentType contentType, long price) {
+        this.contentId = contentId;
+        this.title = title;
+        this.text = text;
+        this.contentType = contentType;
+        this.price = price;
+        this.createdAt = LocalDateTime.now();
+    }
 
 }

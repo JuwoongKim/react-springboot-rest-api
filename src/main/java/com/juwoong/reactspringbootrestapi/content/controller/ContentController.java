@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,9 +44,9 @@ public class ContentController {
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<ContentDto> detail(@PathVariable("id") UUID id) {
-        ContentDto voucherDto = contentService.findById(id);
+        ContentDto response = contentService.findById(id);
 
-        return ResponseEntity.ok(voucherDto);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/deleteAll")
@@ -60,6 +61,13 @@ public class ContentController {
         contentService.deleteById(id);
 
         return ResponseEntity.ok("Deletion has been completed.");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity update(@RequestBody ContentRequest.Update request) {
+        ContentDto response = contentService.update(request);
+
+        return ResponseEntity.ok(response);
     }
 
 }
