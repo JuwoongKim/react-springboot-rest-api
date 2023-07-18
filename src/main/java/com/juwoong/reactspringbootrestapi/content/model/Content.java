@@ -1,8 +1,8 @@
-package com.juwoong.reactspringbootrestapi.model;
+package com.juwoong.reactspringbootrestapi.content.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-import com.juwoong.reactspringbootrestapi.model.constants.ContentType;
+import com.juwoong.reactspringbootrestapi.content.model.constants.ContentType;
 
 public class Content {
 

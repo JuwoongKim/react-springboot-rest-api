@@ -1,4 +1,4 @@
-package com.juwoong.reactspringbootrestapi.model.constants;
+package com.juwoong.reactspringbootrestapi.content.model.constants;
 
 public enum ContentType {
 
