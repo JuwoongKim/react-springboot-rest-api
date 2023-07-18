@@ -23,7 +23,7 @@
 
 ![image](/doc/상품주문ERD.png)
 
-### 설게도 
+### 설계도 
 
 ![image](/doc/AZ_상품도메인.png)
 
