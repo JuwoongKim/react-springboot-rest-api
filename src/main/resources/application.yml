@@ -1,9 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kdt
-  profiles:
-    include: mysql
-
+    username: study
+    password: study
   sql:
     init:
       mode: always

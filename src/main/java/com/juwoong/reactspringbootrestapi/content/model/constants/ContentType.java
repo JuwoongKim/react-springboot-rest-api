@@ -4,7 +4,7 @@ public enum ContentType {
 
     HORROR,
     DRAMA,
-    ACTOIN,
+    ACTION,
     COMIC,
     ROMANCE
     ;
