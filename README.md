@@ -53,22 +53,22 @@
 - [x] 컨텐츠 등록 기능 Service, Repository 구현
 
 
-- [ ] 컨텐츠 도메인에 대한 Response에 및 컨텐츠 요약 정보를 위한 정적 클래스 멤버 추가
-- [ ] 컨턴츠 전체 조회 REST Controller를 Get 메서드로 구현
-- [ ] 컨텐츠 전체조회 기능 Service, Repository 구현
+- [x] 컨텐츠 도메인에 대한 Response에 및 컨텐츠 요약 정보를 위한 정적 클래스 멤버 추가
+- [x] 컨턴츠 전체 조회 REST Controller를 Get 메서드로 구현
+- [x] 컨텐츠 전체조회 기능 Service, Repository 구현
 
 
-- [ ] 컨턴츠 단일 조회 REST Controller를 Get 메서드로 아이디 기준 Path Variable로 구현
-- [ ] 컨텐츠 아이디 기준 단일 조회 기능 Service, Repository 구현
+- [x] 컨턴츠 단일 조회 REST Controller를 Get 메서드로 아이디 기준 Path Variable로 구현
+- [x] 컨텐츠 아이디 기준 단일 조회 기능 Service, Repository 구현
 
 
-- [ ] 컨텐츠 수정 REST Controller를 POST 메서드로 구현
-- [ ] 컨텐츠 도메인에 대한 Reuest 객체에 수정을 위한 정적 클래스 멤버 추가
-- [ ] 컨텐츠 수정  기능 Service, Repository 구현
+- [x] 컨텐츠 수정 REST Controller를 POST 메서드로 구현
+- [x] 컨텐츠 도메인에 대한 Reuest 객체에 수정을 위한 정적 클래스 멤버 추가
+- [x] 컨텐츠 수정  기능 Service, Repository 구현
 
 
-- [ ] 컨턴츠 단일 삭제 REST Controller를 Get 메서드로 아이디 기준 Path Variable로 구현
-- [ ] 컨텐츠 아이디 기준 단일 조회 기능 Service, Repository 구현
+- [x] 컨턴츠 단일 삭제 REST Controller를 Get 메서드로 아이디 기준 Path Variable로 구현
+- [x] 컨텐츠 아이디 기준 단일 조회 기능 Service, Repository 구현
 
 
 #### 사용자 도메인
