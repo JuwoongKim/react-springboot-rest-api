@@ -1,23 +1,108 @@
-# [프로젝트] React - Spring Boot 상품 관리 API 구현
 
-## 프로젝트 소개 😎
+## 상품 관리 및 주문 REST API
 
-React로 만들어진 Front End가 정해져있는 상황에서,
-백엔드 개발자가 Spring Boot로 상품관리 API를 구현하여 A-Z 최종 서비스를 완성시켜봅니다.
 
-## (옵션) 다른 상품의 API로 진행합니다.
+### 요구사항
 
-강의와 다른 상품으로 상품 관리 API를 구현하여 제출해봅니다.
-sample.html을 변경하거나, 새로운 HTML파일을 제작해도 됩니다.
+#### 관리자
+- 컨텐츠 상품 등록
+- 컨텐츠 상품 삭제
+- 컨텐츠 상품 전체 조회
+- 컨텐츠 상품 상세 조회  
+- 컨텐츠 상품 수정
 
-## 이곳은 공개 Repo입니다.
+#### 사용자
+- 컨텐츠 상품 전체 조회
+- 컨텐츠 상품 상세 조회  
+- 상품 주문하기
+- 구매 상품 조회하기
+- 구매 상품 상세조회
 
-1. 이 repo를 fork한 뒤
-2. 여러분의 개인 Repo에서 상품관리 API를 A-Z까지 작업하여
-3. 개발이 끝나면 이 Repo에 PR을 보내어 제출을 완료해주세요.
 
-## Branch 명명 규칙
+### ERD
 
-1. 여러분 repo는 알아서 해주시고 😀(본인 레포니 main으로 하셔두 되져)
-2. prgrms-be-devcourse/spring-board 레포로 PR시 branch는 본인 username을 적어주세요 :)  
-   base repo : `여기repo` base : `username` ← head repo : `여러분repo` compare : `main`
+![image](/doc/상품주문ERD.png)
+
+### 설게도 
+
+![image](/doc/AZ_상품도메인.png)
+
+### 작업 수행순서 
+
+#### 상품 도메인
+
+- [ ] 컨텐츠 엔티티 및 타입을 위한 ENUM 생성
+- [ ] 컨텐츠 엔티티 값 전달 객체 (DTO) 구현
+
+- [ ] 컨텐츠 도메인에 대한 Reuest 객체 추가 및  컨텐츠 등록을 위한 정적 클래스 멤버 추가
+- [ ] 컨텐츠 도메인에 대한 Response 객체 추가 및 컨텐츠 디테일 정보를 위한 정적 클래스 멤버 추가
+
+
+- [ ] 컨텐츠 등록 REST Controller를 POST 메서드로 구현
+- [ ] 컨텐츠 등록 기능 Service, Repository 구현
+
+
+- [ ] 컨텐츠 도메인에 대한 Response에 및 컨텐츠 요약 정보를 위한 정적 클래스 멤버 추가
+- [ ] 컨턴츠 전체 조회 REST Controller를 Get 메서드로 구현
+- [ ] 컨텐츠 전체조회 기능 Service, Repository 구현
+
+
+- [ ] 컨턴츠 단일 조회 REST Controller를 Get 메서드로 아이디 기준 Path Variable로 구현
+- [ ] 컨텐츠 아이디 기준 단일 조회 기능 Service, Repository 구현
+
+
+- [ ] 컨텐츠 수정 REST Controller를 POST 메서드로 구현
+- [ ] 컨텐츠 도메인에 대한 Reuest 객체에 수정을 위한 정적 클래스 멤버 추가
+- [ ] 컨텐츠 수정  기능 Service, Repository 구현
+
+
+- [ ] 컨턴츠 단일 삭제 REST Controller를 Get 메서드로 아이디 기준 Path Variable로 구현
+- [ ] 컨텐츠 아이디 기준 단일 조회 기능 Service, Repository 구현
+
+
+#### 사용자 도메인
+
+- [ ] 사용자 엔티티 생성 값 전달 객체 (DTO) 구현
+- [ ] 사용자 도메인에 대한 Reuest 객체 추가 및  컨텐츠 등록을 위한 정적 클래스 멤버 추가
+- [ ] 사용자 도메인에 대한 Response 객체 추가 및 컨텐츠 디테일 정보를 위한 정적 클래스 멤버 추가
+- [ ] 사용자 등록 REST Controller를 POST 메서드로 구현
+- [ ] 사용자 등록 기능 Service, Repository 구현
+
+
+#### 포켓 도메인
+
+
+- [ ] 포캣 엔티티 생성 값 전달 객체 (DTO) 구현
+- [ ] 포캣 도메인에 대한 Reuest 객체 추가 및  컨텐츠 등록을 위한 정적 클래스 멤버 추가
+- [ ] 포캣 도메인에 대한 Response 객체 추가 및 컨텐츠 디테일 정보를 위한 정적 클래스 멤버 추가
+
+
+- [ ] 포캣 등록 REST Controller를 POST 메서드로 구현
+- [ ] 포캣 등록 기능 Service, Repository 구현
+
+
+- [ ] 포캣 사용자 아이디별 조회 기능 REST Controller를 POST 메서드로 구현
+- [ ] 포캣 사용자 아이디별 조회 기능 Service, Repository 구현
+
+
+- [ ] 포캣 삭제 REST Controller를 get 메서드로 구현
+- [ ] 포캣 삭제 기능 Service, Repository 구현
+
+
+#### 주문 도메인
+
+- [ ] 주문 엔티티 생성 값 전달 객체 (DTO) 구현
+- [ ] 주문 아이템 엔티티 생성 값 전달 객체 (DTO) 구현
+- [ ] 주문 도메인에 대한 Reuest 객체 추가
+- [ ] 주문 도메인에 대한 Response 객체 추가 및 컨텐츠 디테일 정보를 위한 정적 클래스 멤버 추가
+
+- [ ] 주문 등록 REST Controller를 POST 메서드로 구현
+- [ ] 주문 등록 기능 Service, Repository 구현
+
+- [ ] 주문 아이템 등록 기능 Service, Repository 구현
+- [ ] 주문 등록시 주문아이템 등록 기능 Service를 호출하여 사용자 소유 목록을 저장함
+- [ ] 주문 등록시 주문아이템 등록 기능 Service를 호출하여 사용자 소유 목록을 저장함
+
+- [ ] 주문 시 포캣 등록 기능 Service를 호출하여 사용자 소유 목록을 저장함
+
+
