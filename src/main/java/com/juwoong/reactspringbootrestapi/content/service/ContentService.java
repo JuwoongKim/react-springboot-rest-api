@@ -1,5 +1,7 @@
 package com.juwoong.reactspringbootrestapi.content.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import com.juwoong.reactspringbootrestapi.content.controller.request.ContentRequest;
 import com.juwoong.reactspringbootrestapi.content.model.Content;
@@ -22,6 +24,12 @@ public class ContentService {
         return toDTO(contentRepository.save(content));
     }
 
+    public List<ContentDto> getContents() {
+        return contentRepository.findAll()
+            .stream()
+            .map(v -> toDTO(v))
+            .toList();
+    }
 
     private ContentDto toDTO(Content content) {
         return new ContentDto(content.getContentId(), content.getTitle(), content.getText(), content.getContentType(),
