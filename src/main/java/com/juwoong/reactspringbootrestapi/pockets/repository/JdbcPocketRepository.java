@@ -1,5 +1,6 @@
 package com.juwoong.reactspringbootrestapi.pockets.repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.jdbc.core.RowMapper;
@@ -27,7 +28,7 @@ public class JdbcPocketRepository implements PocketRepository {
             .addValue("contentId", pockets.getContentId().toString())
             .addValue("contentTitle", pockets.getContentTitle());
 
-        jdbcTemplate.update("INSERT INTO USERS VALUES (:userId, :email, :password, :name )",
+        jdbcTemplate.update("INSERT INTO POCKETS VALUES (:pocketId, :userId, :contentId, :contentTitle )",
             parameterSource);
 
         return findById(pockets.getUserId());
@@ -41,6 +42,24 @@ public class JdbcPocketRepository implements PocketRepository {
 
         return jdbcTemplate.queryForObject("SELECT * FROM POCKETS WHERE POCKET_ID = :pocketId", parameterSource,
             pocketsRowMapper);
+    }
+
+    public void savePockets(List<Pockets> pocketsList) {
+
+        SqlParameterSource[] batchParams = new SqlParameterSource[pocketsList.size()];
+
+        for (int i = 0; i < pocketsList.size(); i++) {
+            Pockets pockets = pocketsList.get(i);
+            MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("pocketId", pockets.getPocketId().toString())
+                .addValue("userId", pockets.getUserId().toString())
+                .addValue("contentId", pockets.getContentId().toString())
+                .addValue("contentTitle", pockets.getContentTitle());
+            batchParams[i] = params;
+        }
+
+        jdbcTemplate.batchUpdate("INSERT INTO POCKETS VALUES (:pocketId, :userId, :contentId, :contentTitle )",
+            batchParams);
     }
 
     private RowMapper<Pockets> pocketsRowMapper() {

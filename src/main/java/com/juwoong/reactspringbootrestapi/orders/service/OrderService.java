@@ -1,22 +1,29 @@
 package com.juwoong.reactspringbootrestapi.orders.service;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.juwoong.reactspringbootrestapi.orders.controller.request.OrderRequest;
+import com.juwoong.reactspringbootrestapi.orders.model.OrderItems;
 import com.juwoong.reactspringbootrestapi.orders.model.Orders;
 import com.juwoong.reactspringbootrestapi.orders.repository.OrderRepository;
 import com.juwoong.reactspringbootrestapi.orders.service.dto.OrderDto;
+import com.juwoong.reactspringbootrestapi.pockets.service.PocketService;
 
 @Service
 public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderItemsService orderItemsService;
+    private final PocketService pocketService;
 
-    public OrderService(OrderRepository orderRepository, OrderItemsService orderItemsService) {
+    public OrderService(OrderRepository orderRepository, OrderItemsService orderItemsService,
+        PocketService pocketService) {
         this.orderRepository = orderRepository;
         this.orderItemsService = orderItemsService;
+        this.pocketService = pocketService;
     }
 
     @Transactional
@@ -25,6 +32,7 @@ public class OrderService {
 
         Orders savedOrder = orderRepository.save(order);
         orderItemsService.saveOrderItems(savedOrder.getOrderId(), request.getItems());
+        pocketService.savePockets(request.getUserId(), request.getItems());
 
         return toDTO(savedOrder);
     }
