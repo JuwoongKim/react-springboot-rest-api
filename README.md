@@ -83,13 +83,13 @@
 #### 포켓 도메인
 
 
-- [ ] 포캣 엔티티 생성 값 전달 객체 (DTO) 구현
+- [x] 포캣 엔티티 생성 값 전달 객체 (DTO) 구현
 - [ ] 포캣 도메인에 대한 Reuest 객체 추가 및  컨텐츠 등록을 위한 정적 클래스 멤버 추가
 - [ ] 포캣 도메인에 대한 Response 객체 추가 및 컨텐츠 디테일 정보를 위한 정적 클래스 멤버 추가
 
 
 - [ ] 포캣 등록 REST Controller를 POST 메서드로 구현
-- [ ] 포캣 등록 기능 Service, Repository 구현
+- [x] 포캣 등록 기능 Service, Repository 구현
 
 
 - [ ] 포캣 사용자 아이디별 조회 기능 REST Controller를 POST 메서드로 구현
