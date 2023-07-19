@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS pockets;
 DROP TABLE IF EXISTS content;
@@ -35,11 +36,23 @@ CREATE TABLE pockets
 
 CREATE TABLE orders
 (
-    order_id  VARCHAR(200) PRIMARY KEY,
-    user_id   VARCHAR(200) NOT NULL,
-    price     BIGINT       NOT NULL,
+    order_id   VARCHAR(200) PRIMARY KEY,
+    user_id    VARCHAR(200) NOT NULL,
+    price      BIGINT       NOT NULL,
     created_at DATETIME     NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE
         CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE order_items
+(
+    order_item_id VARCHAR(200) PRIMARY KEY,
+    order_id      VARCHAR(200) NOT NULL,
+    content_id    VARCHAR(200) NOT NULL,
+    content_title VARCHAR(255) NOT NULL,
+    price         BIGINT       NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders (order_id) ON DELETE
+        CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (content_id) REFERENCES content (content_id) ON DELETE
+        CASCADE ON UPDATE CASCADE
+);
