@@ -6,9 +6,6 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.juwoong.reactspringbootrestapi.content.controller.request.ContentRequest;
-import com.juwoong.reactspringbootrestapi.content.model.Content;
-import com.juwoong.reactspringbootrestapi.content.service.dto.ContentDto;
 import com.juwoong.reactspringbootrestapi.orders.model.OrderItems;
 import com.juwoong.reactspringbootrestapi.pockets.model.Pockets;
 import com.juwoong.reactspringbootrestapi.pockets.repository.PocketRepository;
@@ -40,6 +37,13 @@ public class PocketService {
 
         pocketRepository.savePockets(pocketsList);
 
+    }
+
+    public List<PocketsDto> findByUserId(UUID userId) {
+        return pocketRepository.findByUserId(userId)
+            .stream()
+            .map(v -> toDTO(v))
+            .toList();
     }
 
     private PocketsDto toDTO(Pockets pockets) {

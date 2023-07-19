@@ -62,6 +62,15 @@ public class JdbcPocketRepository implements PocketRepository {
             batchParams);
     }
 
+    @Override
+    public List<Pockets> findByUserId( UUID userId) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("userId", userId.toString());
+
+        RowMapper<Pockets> pocketsRowMapper = pocketsRowMapper ();
+
+        return jdbcTemplate.query("SELECT * FROM POCKETS WHERE USER_ID = :userId", parameterSource, pocketsRowMapper);
+    }
+
     private RowMapper<Pockets> pocketsRowMapper() {
         return (rs, rowNum) -> {
             UUID pocketId = UUID.fromString(rs.getString("pocket_id"));

@@ -16,4 +16,6 @@ public interface PocketRepository {
     public Pockets findById(UUID pocketId);
 
     public void savePockets(List<Pockets> pocketsList);
+
+    public List<Pockets> findByUserId(UUID userId);
 }
