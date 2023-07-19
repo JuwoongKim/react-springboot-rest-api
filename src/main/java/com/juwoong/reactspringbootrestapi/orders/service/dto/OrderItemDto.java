@@ -1,4 +1,7 @@
 package com.juwoong.reactspringbootrestapi.orders.service.dto;
 
-public class OrderItemDto {
+import java.util.UUID;
+
+public record OrderItemDto (UUID orderItemId, UUID orderId, UUID contentId, String contentTitle, long price) {
+
 }

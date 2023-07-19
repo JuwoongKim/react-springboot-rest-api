@@ -1,8 +1,9 @@
 package com.juwoong.reactspringbootrestapi.orders.repository;
 
 import java.util.List;
+import java.util.UUID;
 
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -40,4 +41,27 @@ public class JdbcOrderItemsRepository implements OrderItemsRepository {
             batchParams);
 
     }
+
+    @Override
+    public List<OrderItems> findByOrderId(UUID orderId) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("orderId", orderId.toString());
+
+        RowMapper<OrderItems> orderItemsRowMapper = orderItemsRowMapper();
+
+        return jdbcTemplate.query("SELECT * FROM ORDER_ITEMS WHERE ORDER_ID = :orderId", parameterSource,
+            orderItemsRowMapper);
+    }
+
+    private RowMapper<OrderItems> orderItemsRowMapper() {
+        return (rs, rowNum) -> {
+            UUID orderItemId = UUID.fromString(rs.getString("order_item_id"));
+            UUID orderId = UUID.fromString(rs.getString("order_id"));
+            UUID contentId = UUID.fromString(rs.getString("content_id"));
+            String contentTitle = rs.getString("content_title");
+            long price = rs.getLong("price");
+
+            return new OrderItems(orderItemId, orderId, contentId, contentTitle, price);
+        };
+    }
+
 }

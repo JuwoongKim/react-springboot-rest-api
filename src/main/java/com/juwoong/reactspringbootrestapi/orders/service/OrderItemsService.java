@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.juwoong.reactspringbootrestapi.orders.model.OrderItems;
 import com.juwoong.reactspringbootrestapi.orders.repository.OrderItemsRepository;
+import com.juwoong.reactspringbootrestapi.orders.service.dto.OrderItemDto;
 
 @Service
 public class OrderItemsService {
@@ -29,6 +30,18 @@ public class OrderItemsService {
 
         orderItemsRepository.saveOrderItems(newOrderItemsList);
 
+    }
+
+    public List<OrderItemDto> findByOrderId(UUID orderId) {
+        return orderItemsRepository.findByOrderId(orderId)
+            .stream()
+            .map(v -> toDTO(v))
+            .toList();
+    }
+
+    private OrderItemDto toDTO(OrderItems orderItems) {
+        return new OrderItemDto(orderItems.getOrderItemId(), orderItems.getOrderId(), orderItems.getContentId(),
+            orderItems.getContentTitle(), orderItems.getPrice());
     }
 
 }
