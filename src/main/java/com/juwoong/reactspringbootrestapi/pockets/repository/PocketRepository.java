@@ -18,4 +18,6 @@ public interface PocketRepository {
     public void savePockets(List<Pockets> pocketsList);
 
     public List<Pockets> findByUserId(UUID userId);
+
+    public void deleteByUserId(UUID userId);
 }

@@ -63,12 +63,21 @@ public class JdbcPocketRepository implements PocketRepository {
     }
 
     @Override
-    public List<Pockets> findByUserId( UUID userId) {
+    public List<Pockets> findByUserId(UUID userId) {
         SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("userId", userId.toString());
 
-        RowMapper<Pockets> pocketsRowMapper = pocketsRowMapper ();
+        RowMapper<Pockets> pocketsRowMapper = pocketsRowMapper();
 
         return jdbcTemplate.query("SELECT * FROM POCKETS WHERE USER_ID = :userId", parameterSource, pocketsRowMapper);
+    }
+
+    @Override
+    public void deleteByUserId(UUID userId) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("userId", userId.toString());
+
+        RowMapper<Pockets> pocketsRowMapper = pocketsRowMapper();
+
+        jdbcTemplate.query("DELETE FROM POCKETS WHERE USER_ID = :userId", parameterSource, pocketsRowMapper);
     }
 
     private RowMapper<Pockets> pocketsRowMapper() {

@@ -46,6 +46,12 @@ public class PocketService {
             .toList();
     }
 
+
+    public void deleteByUserId(UUID userId) {
+        pocketRepository.deleteByUserId(userId);
+    }
+
+
     private PocketsDto toDTO(Pockets pockets) {
         return new PocketsDto(pockets.getPocketId(), pockets.getUserId(), pockets.getContentId(),
             pockets.getContentTitle());
