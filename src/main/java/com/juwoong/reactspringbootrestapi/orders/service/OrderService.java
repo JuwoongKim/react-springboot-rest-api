@@ -1,5 +1,6 @@
 package com.juwoong.reactspringbootrestapi.orders.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import com.juwoong.reactspringbootrestapi.orders.model.Orders;
 import com.juwoong.reactspringbootrestapi.orders.repository.OrderRepository;
 import com.juwoong.reactspringbootrestapi.orders.service.dto.OrderDto;
 import com.juwoong.reactspringbootrestapi.pockets.service.PocketService;
+import com.juwoong.reactspringbootrestapi.pockets.service.dto.PocketsDto;
 
 @Service
 public class OrderService {
@@ -35,6 +37,13 @@ public class OrderService {
         pocketService.savePockets(request.getUserId(), request.getItems());
 
         return toDTO(savedOrder);
+    }
+
+    public List<OrderDto> findByUserId(UUID userId) {
+        return orderRepository.findByUserId(userId)
+            .stream()
+            .map(v -> toDTO(v))
+            .toList();
     }
 
     private OrderDto toDTO(Orders order) {

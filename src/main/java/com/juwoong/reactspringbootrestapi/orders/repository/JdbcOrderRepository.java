@@ -1,6 +1,7 @@
 package com.juwoong.reactspringbootrestapi.orders.repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.jdbc.core.RowMapper;
@@ -45,6 +46,16 @@ public class JdbcOrderRepository implements OrderRepository {
         return jdbcTemplate.queryForObject("SELECT * FROM ORDERS WHERE ORDER_ID = :orderId", parameterSource,
             orderRowMapper);
     }
+
+    @Override
+    public List<Orders> findByUserId(UUID userId) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("userId", userId.toString());
+
+        RowMapper<Orders> orderRowMapper = orderRowMapper();
+
+        return jdbcTemplate.query("SELECT * FROM ORDERS WHERE USER_ID = :userId", parameterSource, orderRowMapper);
+    }
+
 
     private RowMapper<Orders> orderRowMapper() {
         return (rs, rowNum) -> {
