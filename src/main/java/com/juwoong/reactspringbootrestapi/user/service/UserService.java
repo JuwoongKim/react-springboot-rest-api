@@ -2,9 +2,6 @@ package com.juwoong.reactspringbootrestapi.user.service;
 
 import org.springframework.stereotype.Service;
 
-import com.juwoong.reactspringbootrestapi.content.controller.request.ContentRequest;
-import com.juwoong.reactspringbootrestapi.content.model.Content;
-import com.juwoong.reactspringbootrestapi.content.service.dto.ContentDto;
 import com.juwoong.reactspringbootrestapi.user.controller.request.UserRequest;
 import com.juwoong.reactspringbootrestapi.user.model.Users;
 import com.juwoong.reactspringbootrestapi.user.repository.UserRepository;
@@ -19,10 +16,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserDto createUser (UserRequest.Create request) {
+    public UserDto createUser(UserRequest.Create request) {
         Users user = new Users(request.getEmail(), request.getPassword(), request.getName());
 
         return toDTO(userRepository.save(user));
+    }
+
+    public UserDto login(String email, String password) {
+
+        return toDTO(userRepository.findByEmailAndPassword(email, password));
     }
 
     private UserDto toDTO(Users user) {

@@ -31,15 +31,11 @@ public class PocketsController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteById(@PathVariable("id") UUID id) {
         pocketService.deleteByUserId(id);
 
         return ResponseEntity.ok(id);
     }
-
-
-
 
 }

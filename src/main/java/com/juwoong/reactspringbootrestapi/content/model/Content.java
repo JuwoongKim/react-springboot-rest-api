@@ -5,17 +5,19 @@ import java.util.UUID;
 import com.juwoong.reactspringbootrestapi.content.model.constants.ContentType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Content {
 
-    private final UUID contentId;
+    private UUID contentId;
     private String title;
     private String text;
     private ContentType contentType;
     private long price;
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     public Content(String title, String text, ContentType contentType, long price) {
         this.contentId = UUID.randomUUID();

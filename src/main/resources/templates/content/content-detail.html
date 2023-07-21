@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Content Detail</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h1>Content Detail</h1>
+  <div>
+    <p><strong>Title:</strong> <span th:text="${content.title}"></span></p>
+    <p><strong>Content Type:</strong> <span th:text="${content.contentType}"></span></p>
+    <p><strong>Content:</strong></p>
+    <!-- 텍스트 박스를 사용하여 내용 표시 -->
+    <textarea class="form-control" rows="5" th:utext="${content.text}"></textarea>
+    <p><strong>Price:</strong> <span th:text="${content.price}"></span></p>
+    <p><strong>CreatedAt:</strong> <span th:text="${content.createdAt}"></span></p>
+  </div>
+  <a href="/mainLogin" class="btn btn-primary mt-3">Back to Content List</a>
+</div>
+
+<!-- Bootstrap JS (Optional: If you want to add Bootstrap's interactive components) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

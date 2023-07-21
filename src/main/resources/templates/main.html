@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Content Store</h1>
+
+    <br>
+    <br>
+
+    <h2>Content List</h2>
+
+    <hr>
+
+    <a href="/user/login" class="btn btn-primary mt-3">Login to see Detail</a> <!-- 로그인 페이지로 이동하는 버튼 -->
+
+
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Content Type</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 반복문을 사용하여 리스트를 표현 -->
+        <tr th:each="content : ${contentList}">
+            <td th:text="${content.title}"></td>
+            <td th:text="${content.contentType}"></td>
+            <td th:text="${content.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS (Optional: If you want to add Bootstrap's interactive components) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

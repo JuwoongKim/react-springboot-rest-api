@@ -13,4 +13,6 @@ public interface UserRepository {
 
     public Users findById(UUID userId);
 
+    public Users findByEmailAndPassword(String email, String password);
+
 }

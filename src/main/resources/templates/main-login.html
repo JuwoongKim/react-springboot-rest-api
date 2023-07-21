@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+
+  <!-- 추가한 CSS -->
+  <style>
+    /* 행에 호버(hover) 효과를 주기 위한 스타일 */
+    tr[data-href]:hover {
+      background-color: #f8f9fa; /* 배경색 변경 */
+      cursor: pointer; /* 포인터 모양 변경 */
+    }
+  </style>
+
+  <style>
+    /* Custom style to remove space between button and Total Price */
+    .btn-total-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-total-container button {
+      margin-right: 5px; /* Adjust the value as needed */
+    }
+  </style>
+
+
+</head>
+<body>
+
+
+
+<div class="container mt-5">
+  <h1>Content Store</h1>
+
+  <p>Hello, <span th:text="${user.name}"></span>!</p>
+
+  <br>
+  <br>
+
+  <div class="container mt-3">
+    <div class="row align-items-center">
+      <div class="col">
+        <h2 class="d-inline">Content List</h2>
+      </div>
+      <div class="col text-end">
+        <button type="button" class="btn btn-primary" onclick="placeOrder()">Order</button>
+        <a th:href="@{/pocket/list/{userId}(userId=${user.userId})}">
+          <button class="btn btn-primary">MY</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <br>
+  <br>
+
+  <p>Total Price: <span id="totalPrice">0</span></p>
+
+  <input type="hidden" id="title" th:value="${user.userId}" />
+  <table class="table mt-3">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content Type</th>
+      <th>Price</th>
+      <th>Select</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 반복문을 사용하여 리스트를 표현 -->
+    <tr th:each="content : ${contentList}" th:attr="data-href=@{/content/detail/{contentId}(contentId=${content.contentId})}">
+      <!-- 상세 페이지로 이동하는 링크 -->
+      <td th:text="${content.title}"></td>
+      <td th:text="${content.contentType}"></td>
+      <td th:text="${content.price}"></td>
+      <td><input type="checkbox" name="selectedItems" th:value="${content.contentId}" th:data-title="${content.title}" th:data-price="${content.price}" th:data-contentId="${content.contentId}" onchange="updateTotal()" onclick="event.stopPropagation();" ></td> <!-- 체크박스 -->
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- Bootstrap JS (Optional: If you want to add Bootstrap's interactive components) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+<!-- 자바스크립트 -->
+<script th:inline="javascript">
+  function initializeTotal() {
+    document.getElementById('totalPrice').innerText = 0; // 초기에 totalPrice를 0으로 설정
+    updateTotal(); // 체크박스 선택 여부에 따라 totalPrice 업데이트
+  }
+
+  function updateTotal() {
+    var total = 0;
+    var checkboxes = document.getElementsByName('selectedItems');
+    checkboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        var price = parseInt(checkbox.dataset.price);
+        total += price;
+      }
+    });
+
+    // 체크된 체크박스가 없으면 total을 0으로 설정
+    if (total === 0) {
+      document.getElementById('totalPrice').innerText = 0;
+    } else {
+      document.getElementById('totalPrice').innerText = total;
+    }
+  }
+
+  function placeOrder() {
+    var selectedItems = [];
+    var checkboxes = document.getElementsByName('selectedItems');
+    checkboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        var contentId = checkbox.value;
+        var contentTitle = checkbox.dataset.title;
+        var price = checkbox.dataset.price;
+        selectedItems.push({ contentId: contentId, contentTitle: contentTitle, price: price });
+      }
+    });
+
+    // 이 부분에서 주문 요청을 보냅니다.
+    var orderRequest = {
+      userId: document.getElementById('title').value,
+      items: selectedItems,
+      price: parseInt(document.getElementById('totalPrice').innerText) // 체크박스된 상품 구매금액의 합을 price에 넣기
+    };
+
+    // Ajax 또는 Fetch를 이용하여 주문 요청을 보내는 코드를 작성해야 합니다.
+    // 예를 들면:
+    fetch('/order/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderRequest)
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      // 서버로부터 응답을 받은 경우 처리할 로직을 작성합니다.
+      // 예를 들면, 주문 완료 메시지를 표시하거나 다른 동작을 수행합니다.
+      alert('주문이 완료되었습니다!');
+      console.log(data);
+    }).catch(function (error) {
+      console.error('Error:', error);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeTotal);
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // 테이블의 각 행을 클릭했을 때 이동
+    var tableRows = document.querySelectorAll("tr[data-href]");
+    tableRows.forEach(function (row) {
+      row.addEventListener("click", function () {
+        var href = this.dataset.href;
+        window.location.href = href;
+      });
+    });
+  });
+
+
+
+</script>
+</body>
+</html>

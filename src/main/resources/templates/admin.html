@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Content List</title>
+  <!-- 부트스트랩 CSS 링크 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1 class="mt-4">Content List</h1>
+  <table class="table table-striped mt-4">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Text</th>
+      <th>Content Type</th>
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 반복문을 사용하여 리스트를 표현 -->
+    <tr th:each="content : ${contentList}">
+      <td th:text="${content.title}"></td>
+      <td th:text="${content.text}"></td>
+      <td th:text="${content.contentType}"></td>
+      <td th:text="${content.price}"></td>
+      <td>
+        <a th:href="@{/content/edit/{id}(id=${content.contentId})}" class="btn btn-primary btn-sm">Edit</a>
+        <a th:href="@{/content/delete/{id}(id=${content.contentId})}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/content/new}" class="btn btn-success">New Content</a>
+</div>
+
+<!-- 부트스트랩 JS 및 jQuery 추가 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

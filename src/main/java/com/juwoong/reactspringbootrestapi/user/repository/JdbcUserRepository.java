@@ -43,6 +43,18 @@ public class JdbcUserRepository implements UserRepository {
             usersRowMapper);
     }
 
+    @Override
+    public Users findByEmailAndPassword(String email, String password){
+        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("email", email)
+            .addValue("password",password);
+
+        RowMapper<Users> usersRowMapper = UsersRowMapper();
+
+        return jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE EMAIL = :email AND PASSWORD = :password", parameterSource,
+            usersRowMapper);
+    };
+
+
     private RowMapper<Users> UsersRowMapper() {
         return (rs, rowNum) -> {
             UUID userId = UUID.fromString(rs.getString("user_id"));

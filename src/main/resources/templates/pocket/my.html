@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Pocket List</title>
+  <!-- 부트스트랩 CSS 링크 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1 class="mt-4">Pocket List</h1>
+  <table class="table table-striped mt-4">
+    <thead>
+    <tr>
+      <th>Pocket ID</th>
+      <th>User ID</th>
+      <th>Content ID</th>
+      <th>Content Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 반복문을 사용하여 리스트를 표현 -->
+    <tr th:each="pocket : ${pocket}">
+      <td th:text="${pocket.pocketId}"></td>
+      <td th:text="${pocket.userId}"></td>
+      <td th:text="${pocket.contentId}"></td>
+      <td th:text="${pocket.contentTitle}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="/mainLogin" class="btn btn-primary mt-3">Back to Content List</a>
+</div>
+
+<!-- 부트스트랩 JS 및 jQuery 추가 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
