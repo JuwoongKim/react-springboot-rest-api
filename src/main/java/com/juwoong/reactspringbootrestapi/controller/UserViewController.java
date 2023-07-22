@@ -33,7 +33,6 @@ public class UserViewController {
 
     @PostMapping("/login")
     public String loginUser(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
-
         try{
             UserDto user = userService.login(email, password);
             session.setAttribute("user", user);
@@ -46,6 +45,8 @@ public class UserViewController {
         }
 
     }
+
+
 
     // @PostMapping("/login")
     // public ResponseEntity<UserDto> createUser(@RequestBody UserRequest.Create request) {

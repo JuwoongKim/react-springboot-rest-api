@@ -32,8 +32,7 @@ public class MainViewController {
 
     @GetMapping("/mainLogin")
     public String mainLogin (Model model, HttpServletRequest request) {
-
-        HttpSession session = request.getSession(false); // false인 경우 세션이 없을 때 새로 생성하지 않고 null 반환
+        HttpSession session = request.getSession(false);
         if (session != null) {
             UserDto user = (UserDto) session.getAttribute("user");
 

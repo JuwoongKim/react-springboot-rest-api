@@ -25,11 +25,8 @@ public class OrderViewController {
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<OrderDto> createUser(@RequestBody OrderRequest.Create request) {
+    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderRequest.Create request) {
         OrderDto response = orderService.createOrder(request);
-
-        System.out.println(request.getUserId());
-        System.out.println(request.getItems().size());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
